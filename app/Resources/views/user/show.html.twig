@@ -1,0 +1,62 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+        <div class="panel panel-default">
+            <h1>User</h1>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>{{ user.genre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nationalite</th>
+                        <td>{{ user.nationalite }}</td>
+                    </tr>
+                    <tr>
+                        <th>Profession</th>
+                        <td>{{ user.profession }}</td>
+                    </tr>
+                    <tr>
+                        <th>Swapbank</th>
+                        <td>{{ user.swapBank }}</td>
+                    </tr>
+                    <tr>
+                        <th>Image</th>
+                        <td>{{ user.image }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ user.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Verificationmotdepasse</th>
+                        <td>{{ user.verificationMotDePasse }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul>
+                <li>
+                    <a href="{{ path('user_index') }}">Back to the list</a>
+                </li>
+                <li>
+                    <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

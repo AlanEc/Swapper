@@ -1,0 +1,51 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<div class="panel-body shadow Compte">
+				<img class="img-responsive" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
+				<p>{{ user.username }}</p>
+				<p>Ma swapBank : {{ user.swapBank }}
+				<a href="{{ path('swap_platform_profil') }}">
+					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Modifier mon profil</button>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-7">
+			<div class="panel panel-default shadow">
+				<h1>Mes Swaps</h1>
+				{% for service in services %}
+				<div  id="rowMySwaps" class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<a href="{{ path('swap_calendar', { 'serviceId': service.id }) }}">
+							<div id="mySwap" class="panel panel-default">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-1 mySwaps">
+										<p>{{ service.categorie }} </p>
+										<p>{{ service.adresse }}</p>
+									</div>
+									<a href="{{path('swap_delete', { 'serviceId': service.id }) }}">
+										<div class="col-md-2  deletedSwap ">
+											<span class="glyphicon glyphicon-remove fontbig hidden-xs"></span>
+											<br>
+											<p>Supprimer</p>
+										</div>
+									</a>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

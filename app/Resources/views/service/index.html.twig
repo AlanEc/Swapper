@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Moderesa</th>
+                <th>Nombrepersonnes</th>
+                <th>Adresse</th>
+                <th>Longitude</th>
+                <th>Lattitude</th>
+                <th>Vegetarien</th>
+                <th>Swappoints</th>
+                <th>Actions</th>
+                <th><a href="{{ path('service_new') }}">Create a new service</a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td><a href="{{ path('service_show', { 'id': service.id }) }}">{{ service.id }}</a></td>
+                <td>{{ service.categorie }}</td>
+                <td>{{ service.modeResa }}</td>
+                <td>{{ service.nombrePersonnes }}</td>
+                <td>{{ service.adresse }}</td>
+                <td>{{ service.longitude }}</td>
+                <td>{{ service.lattitude }}</td>
+                <td>{{ service.vegetarien }}</td>
+                <td>{{ service.swapPoints }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('service_show', { 'id': service.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('service_edit', { 'id': service.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+{% endblock %}

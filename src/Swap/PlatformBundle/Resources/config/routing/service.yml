@@ -1,0 +1,24 @@
+service_index:
+    path:     /
+    defaults: { _controller: "SwapPlatformBundle:CrudService:index" }
+    methods:  GET
+
+service_show:
+    path:     /{id}/show
+    defaults: { _controller: "SwapPlatformBundle:CrudService:show" }
+    methods:  GET
+
+service_new:
+    path:     /new
+    defaults: { _controller: "SwapPlatformBundle:CrudService:new" }
+    methods:  [GET, POST]
+
+service_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SwapPlatformBundle:CrudService:edit" }
+    methods:  [GET, POST]
+
+service_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SwapPlatformBundle:CrudService:delete" }
+    methods:  DELETE

@@ -1,0 +1,33 @@
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SwapTravel</a>
+    </div>
+    <form class="navbar-form navbar-left searchnavbar" role="search" method="post" id="searchFormNav" action="{{ path('swap_search') }}">
+      <div class="form-group input-group">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search colorblue"></span></span>
+        <input id="adresse" name="adresse" class="form-control input-md controls" type="text">
+      </div>
+      <input type="submit"/>  
+    </form>
+    {{ app.user.username }}
+    <div id="iconeNavigation"
+      <ul class="nav navbar-nav navbar-right">
+        <li class=""><a href="{{ path('swap_mail_box') }}"> <span class="glyphicon glyphicon-envelope fa-lg"></span></a></li>
+        <li><a href="{{ path('swap_platform_moncompte') }}"><span class="glyphicon glyphicon-user fa-lg"></span> Mon compte</a></li>
+        <li class="separation">|</li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in fa-lg"></span></a></li>
+        <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        {% endif %}</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</nav>
+

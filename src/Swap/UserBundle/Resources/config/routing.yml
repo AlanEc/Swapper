@@ -1,0 +1,4 @@
+swap_user_user:
+    resource: "@SwapUserBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+

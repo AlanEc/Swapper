@@ -1,0 +1,63 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<div class="panel-body shadow Compte">
+				<img class="img-responsive" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
+				<p>{{ user.username }}</p>
+				<p>Ma swapBank : {{ user.swapBank }}
+				<a href="{{ path('swap_platform_profil') }}">
+					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Modifier mon profil</button>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-7">
+			<div class="panel panel-default shadow">
+				<div id="calendar" class="multi-select-calender"></div>
+				<div class="box">
+				</div>
+				<div id="deleteDate">
+					{{ form_start(form) }}
+					{# Les erreurs générales du formulaire. #}
+					{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.minDate, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.maxDate, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-default' }} ) }}
+					{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				</div>
+				<hr>
+				<div id="deletedDates">
+					{% for deletedDate in service.deletedDates %}
+						{% if deletedDate.maxDate != null %}
+							<p>  Date : Du {{ deletedDate.minDate}} au {{deletedDate.maxDate}} <span class="fontxsm colorgrey glyphicon glyphicon-remove-circle"</span></p>
+						{% else %}
+							<p>  Date : Du {{ deletedDate.minDate}} <button onclick="reactivateDate({{ deletedDate.id }} )"><span class="fontxsm colorgrey glyphicon glyphicon-remove-circle"</span></button></p>
+						{% endif %}
+					{% endfor %}
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% include 'calendarJs.html.twig' %}
+<script>
+function reactivateDate(date) {
+	var data = date;
+	$.ajax({
+	    url : "{{path('swap_calendar_reactivate_date')}}",
+	    type : 'POST', 
+	    data : 'data=' + data,
+	    success :function(data) {
+
+	      }
+	});
+}
+</script>
+{% endblock %}

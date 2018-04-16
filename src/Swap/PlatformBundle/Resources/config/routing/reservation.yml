@@ -1,0 +1,24 @@
+reservation_index:
+    path:     /
+    defaults: { _controller: "SwapPlatformBundle:CrudReservation:index" }
+    methods:  GET
+
+reservation_show:
+    path:     /{id}/show
+    defaults: { _controller: "SwapPlatformBundle:CrudReservation:show" }
+    methods:  GET
+
+reservation_new:
+    path:     /new
+    defaults: { _controller: "SwapPlatformBundle:CrudReservation:new" }
+    methods:  [GET, POST]
+
+reservation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SwapPlatformBundle:CrudReservation:edit" }
+    methods:  [GET, POST]
+
+reservation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SwapPlatformBundle:CrudReservation:delete" }
+    methods:  DELETE

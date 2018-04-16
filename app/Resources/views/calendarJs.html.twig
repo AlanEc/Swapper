@@ -1,0 +1,54 @@
+
+<script>
+// var date;
+
+// for (var i = 0; i < date.length; i++){
+// var tab = [];
+// tab = "'" + date[i] + "'";
+// }
+
+var rangeDate = [{% for date in service.deletedDates %} 
+{% if date.maxDate != null %}
+['{{ (date.minDate) }}', '{{ (date.maxDate) }}'],
+{% endif %}
+{% endfor %}];
+
+var date = [{% for date in service.deletedDates %} 
+{% if date.maxDate == null %}
+'{{ (date.minDate) }}', 
+{% endif %}
+{% endfor %}];
+
+$('.multi-select-calender').pignoseCalendar({
+	multiple: true,
+	lang: 'fr',
+	week: 1,
+	// format: 'DD-MM-YYYY',
+	disabledDates: date,
+	disabledRanges: rangeDate,
+	select: function(date, obj) { 
+		obj.calendar.parent().next().show().text('Vous avez seléctionné la date du : ' + 
+			(date[0] === null? 'Aucune date séléctionnée':date[0].format('DD-MM-YYYY')) +
+			' - ' + 
+			(date[1] === null? 'Aucune date séléctionnée':date[1].format('DD-MM-YYYY')) +
+			'');
+		$(document).ready(function(){
+			$("button").click(function(){
+				if (date[1] && date[0] !== null) {
+					$("#deleted_date_minDate").val(date[0].format('YYYY-MM-DD'));
+					$("#deleted_date_maxDate").val(date[1].format('YYYY-MM-DD'));
+				} 
+				else if (date[1] !== null) {
+					$("#deleted_date_maxDate").val(date[1].format('YYYY-MM-DD'));
+					$("#deleted_date_maxDate").val('');
+				}
+
+				else {
+					$("#deleted_date_minDate").val(date[0].format('YYYY-MM-DD'));
+					$("#deleted_date_maxDate").val('');
+				}					
+			});
+		});	
+	}
+});
+</script>

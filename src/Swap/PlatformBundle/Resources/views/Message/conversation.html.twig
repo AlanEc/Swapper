@@ -1,0 +1,109 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-md-offset-1">
+				<div class="panel-body shadow Compte">
+					<img class="img-responsive img-circle img-responsive" id="silouhetteConversation" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
+					{% if messageParent.author.id == userId %}
+						<div class="namePorfilConversation">{{ messageParent.recipient.username }}</div>
+					{% else %}
+						<div class="namePorfilConversation">{{ messageParent.author.username }}</div>
+					{% endif %}
+						<div id="bookingSummary">
+						<p>Type de demande : {{ service.categorie }}</p>
+						<p>Dates : {{ service.categorie }} </p>
+						<p>Nombre de personnes : {{ service.nombrePersonnes }}</p>
+					</div>
+				</div>
+			</div>
+			<div id="conversation-message" class="col-md-offset-1 col-md-6">
+				<div id="bloc-message-conversation" class="panel-body shadow Compte">
+					{{ form_start(form) }}
+					{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.content, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.save, { 'attr': { 'class' : 'btn btn-group pull-right' }} ) }}        
+					{{ form_rest(form, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				</div>	
+			<div id="messageParent">
+				{% if messageParent.author.id == userId %}
+					<div class="row">
+						<div id="conversation-answer" class="col-xs-10">
+							<div id="bloc-author-conversation" class="panel-body shadow Compte">
+								<p>Le : {{ messageParent.date }}</p>
+								{{ messageParent.content }}
+							</div>
+						</div>
+						<div id="polygon" class="col-xs-1">
+							<svg width="100%" height="30" viewBox="0 0 100 100" preserveAspectRatio="none">
+								<polygon points="0,0 100,0 0,100" style="fill:rgba(163,210,240,1)" />
+							</svg>
+						</div>
+						<div id="silhouette" class="col-xs-1">
+							<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+						</div>
+					</div>
+				{% else %}
+					<div class="row">
+						<div id="silhouette" class="col-xs-1">
+							<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+						</div>
+						<div id="polygon" class="col-xs-1">
+							<svg width="100%" height="30" viewBox="0 0 100 100" preserveAspectRatio="none">
+								<polygon points="0,0 100,0 100,100" style="fill:#fff" />
+							</svg>
+						</div>
+						<div id="conversation-answer" class="col-xs-10">
+							<div id="bloc-recipient-conversation" class="panel-body shadow Compte">
+								<p>Le : {{ messageParent.date }}</p>
+								{{ messageParent.content }}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			{% for message in listMessage %}
+				{% if message.author.id == userId %}
+					<div class="row">
+						<div id="conversation-answer" class="col-xs-10">
+							<div id="bloc-author-conversation" class="panel-body shadow Compte">
+								<p>Le : {{ message.date }}</p>
+								{{ message.content }}
+							</div>
+						</div>
+						<div id="polygon" class="col-xs-1">
+							<svg width="100%" height="30" viewBox="0 0 100 100" preserveAspectRatio="none">
+								<polygon points="0,0 100,0 0,100" style="fill:rgba(163,210,240,1)" />
+							</svg>
+						</div>
+						<div id="silhouette" class="col-xs-1">
+							<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+						</div>
+					</div>
+				{% else %}
+					<div class="row">
+						<div id="silhouette" class="col-xs-1">
+							<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+						</div>
+						<div id="polygon" class="col-xs-1">
+							<svg width="100%" height="30" viewBox="0 0 100 100" preserveAspectRatio="none">
+								<polygon points="0,0 100,0 100,100" style="fill:#fff" />
+							</svg>
+						</div>
+						<div id="conversation-answer" class="col-xs-10">
+							<div id="bloc-recipient-conversation" class="panel-body shadow Compte">
+								<p>Le : {{ message.date }}</p>
+								{{ message.content }}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+		
+	</div>
+{% endblock %}

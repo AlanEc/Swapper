@@ -1,0 +1,35 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-3">
+			<div class="panel-body shadow Compte">
+				<img class="img-responsive" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
+				<a href="{{ path('swap_platform_profil') }}">
+					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Modifier mon profil</button>
+				</a>
+			</div>
+		</div>
+		<div class=" col-md-7">
+			<div class="panel-body shadow FormulaireAjouterSwap">
+			<h3>Ajouter un Swap</h3>
+			<span class="sousTitre"><p>1. Choisir une catégorie de Swap</p><span>
+				{{ form_start(form) }}
+				{# Les erreurs générales du formulaire. #}
+				{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_row(form.categorie, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-primary ' }} ) }}
+				{{ form_rest(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
+			</div>
+		</div>
+	</div>
+</div>
+			
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}

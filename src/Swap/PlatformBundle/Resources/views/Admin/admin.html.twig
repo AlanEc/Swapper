@@ -1,0 +1,37 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="tabbable" id="tabs-895083">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#panel-508380" data-toggle="tab">Reservations</a>
+                    </li>
+                    <li>
+                        <a href="#panel-707003" data-toggle="tab">Services</a>
+                    </li>
+                    <li>
+                        <a href="#panel-707004" data-toggle="tab">Utilisateurs</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-508380">
+                        <table class="table table-striped">
+                            {% include 'reservation/index.html.twig' %}
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="panel-707003">
+                        <table class="table table-striped" id="comment_signaler">
+                            {% include 'service/index.html.twig' %}
+                    </table>
+                    </div>
+                    <div class="tab-pane" id="panel-707004">
+                        <table class="table table-striped" id="admin_coment">
+                             {% include 'user/index.html.twig' %}
+                        </table>
+                    </div>
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

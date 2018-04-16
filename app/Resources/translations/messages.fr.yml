@@ -1,0 +1,25 @@
+core:
+    dashboard: 
+        block_notification:
+            title: Mes notification
+        block_request_sent:
+            title: Mes demandes envoyées
+        block_request_received:
+            title: Mes demandes reçu
+        block_next_swap_toReceived:
+            title: Prochains services que vous allez recevoir
+        block_next_swap_toGive:
+            title: Prochains service que allez rendre
+        block_swap_history:
+            title: Historique des services qui vous ont été rendus
+    index:
+      block_concept1: Swapper.com est le lieu de rencontre pour les individus désireux de voyager à la fois à moindre coût et de façon alternative. C'est un lieu à la fois d'équité, de convivialité et d'échange.
+          Inspiré par les systèmes de Sel (système d'échange local), Swap,com à l'ambition d'appliquer ce système égalitaire aux voyages.
+          L'objectif est de rendre accessible le plus de destinations possible au plus grand nombre sans avoir à débourser un centime!
+      block_concept2: L'intérêt est de favoriser le développement d'un système d'économie solidaire et international appliqué au voyage, L'objectif est bien sûr la rencontre, la convivialité, le partage, de faire des économies. Mais aussi de voyager autrement, car un Swapper à la possibilité de réellement s'imprégner de la culture d'un pays et de ses richesses grâce aux échanges de services. Swap.com permet de créer une communauté de voyageurs solidaires, réunis autour du même désir de rencontre.
+      block_concept3: Pour le swapper, le principe est simple, chaque utilisateur dispose d'un compte SwapBank. Celui-ci est crédité de 50 SwapPoint après s'être inscrit, ce qui équivaut à une nuit. Chaque Swapper doit à son inscription définir les services qui lui est possible de rendre, Cela peut être de fournir un repas, un hébergement, de proposer une excursion, une visite, ou encore d'aller chercher un Swapper à l'aéroport, ou de prêter sa voiture. Puis il indiques ses disponibilités. Caque service rendu vous apportera des points, que vous pourrez vous même redépenser lors de vos voyages! 
+      block_concept4: Il permet de rétablir les inégalités qu'implique notre système monétaire actuel. C'est pour ça que chez Swap contrairement à d'autres sites les services ont la même valeur peut importe, le lieux où il est prodigué. 
+      title_concept1: LE CONCEPT
+      title_concept2: COMMENT CA MARCHE ?
+      title_concept3: LE SYSTEME DE POINT
+      title_concept4: LE SYSTEME DE POINT

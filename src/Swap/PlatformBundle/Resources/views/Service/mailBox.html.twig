@@ -1,0 +1,53 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10 ">
+			<div id="mailBox">
+				{% for message in listMessage %}
+					{% if message.author.id != idUser %}
+						<div class="row">
+							<div class="col-md-offset-1 col-md-10 ">
+								<div>
+									<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">
+									<div id="silhouette" class="col-xs-1">
+										<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+									</div>
+									<div class="col-md-offset-1 col-md-2 ">
+										 message.author.username }}
+									</div>
+									<div class="col-md-2 ">
+										{{ message.content }}
+									</div>				
+									</a>
+								</div>
+							</div>
+					{% else %}
+							<div class="row">
+							<div class="col-md-offset-1 col-md-10 ">
+								<div>
+									<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">	
+										<div id="silhouette" class="col-xs-1">
+										<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+										</div>
+
+										<div class="col-md-offset-1 col-md-2 ">
+										{{ message.recipient.username }}
+										</div>
+										<div class="col-md-2 ">
+										{{ message.content }}
+										</div>				
+									</a>
+								</div>
+							</div>
+					{% endif %}
+			
+					</div>
+					<hr/>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+    Swap_form.FormCreator:
+        class: Swap\PlatformBundle\Services\FormCreator
+        arguments: ["@doctrine.orm.entity_manager"] 
+    Swap_points.CalculPoints:
+        class: Swap\PlatformBundle\Services\CalculPoints
+    Swap_form.Filter:
+        class: Swap\PlatformBundle\Form\FormFilter
+    Swap_message.Message:
+        class: Swap\PlatformBundle\Services\Message
+        arguments: ["@mailer", "@templating"] 
+    Swap.Repository:
+        arguments: ["@doctrine.orm.entity_manager"]
+        class: Swap\PlatformBundle\Services\Repository
+
+
+    

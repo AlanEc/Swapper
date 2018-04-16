@@ -1,0 +1,11 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    file_upload:
+        class : Swap\PlatformBundle\Services\FileUploader
+        arguments:
+            $targetDir: '%images_directory%'
+   

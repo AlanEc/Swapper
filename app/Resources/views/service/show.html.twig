@@ -1,0 +1,66 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+        <div class="panel panel-default">
+            <h1>Service</h1>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ service.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Categorie</th>
+                        <td>{{ service.categorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Moderesa</th>
+                        <td>{{ service.modeResa }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombrepersonnes</th>
+                        <td>{{ service.nombrePersonnes }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ service.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <th>Longitude</th>
+                        <td>{{ service.longitude }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lattitude</th>
+                        <td>{{ service.lattitude }}</td>
+                    </tr>
+                    <tr>
+                        <th>Vegetarien</th>
+                        <td>{{ service.vegetarien }}</td>
+                    </tr>
+                    <tr>
+                        <th>Swappoints</th>
+                        <td>{{ service.swapPoints }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul>
+                <li>
+                    <a href="{{ path('service_index') }}">Back to the list</a>
+                </li>
+                <li>
+                    <a href="{{ path('service_edit', { 'id': service.id }) }}">Edit</a>
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datedeparture</th>
+                <th>Datearrival</th>
+                <th>Totalswappoints</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th><a href="{{ path('reservation_new') }}">Create a new reservation</a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td><a href="{{ path('reservation_show', { 'id': reservation.id }) }}">{{ reservation.id }}</a></td>
+                <td>{% if reservation.dateDeparture %}{{ reservation.dateDeparture|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if reservation.dateArrival %}{{ reservation.dateArrival|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ reservation.totalSwapPoints }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reservation_show', { 'id': reservation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+{% endblock %}

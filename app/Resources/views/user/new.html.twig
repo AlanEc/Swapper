@@ -1,0 +1,22 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+        <div class="panel panel-default">
+            <h1>User creation</h1>
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" value="Create" />
+            {{ form_end(form) }}
+
+            <ul>
+                <li>
+                    <a href="{{ path('user_index') }}">Back to the list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
