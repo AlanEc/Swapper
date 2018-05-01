@@ -1,35 +1,38 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>{% block title %}Swap{% endblock %}</title>
-    <link rel="stylesheet" href="{{asset('bundles/css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('bundles/css/style.css') }}">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"> 
-    <link rel="stylesheet" href="{{asset('bundles/calendar/dist/css/pignose.calendar.css') }}">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB1Z4LA0_Q-qH3Sfq-vIr3lShYnIwS1KUw&libraries=places"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/calendar/dist/css/pignose.calendar.css') }}">
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDWGLLyEzdTpOOIT44F47GKcq2DzmrEwXs&libraries=places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script>
-    moment().format();
+        moment().format();
     </script>
-    <script src="{{asset('bundles/calendar/dist/js/pignose.calendar.js') }}"></script>
-  </head>
-  <body>
-    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-      {{ include("SwapPlatformBundle:Swap:menuNavigationConnecte.html.twig") }}
-    {% else %}
-      {{ include("SwapPlatformBundle:Swap:menuNavigation.html.twig") }}
-    {% endif %}
-    {% block body %}
-    {% endblock %}
-    
-    <script src="{{asset('bundles/js/datepicker.js') }}"></script>
-    <script src="{{asset('bundles/FlexSlider/jquery.flexslider.js') }}"></script>
-    <script src="{{asset('bundles/js/datepickerFilter.js') }}"></script>
+    <script src="{{ asset('bundles/calendar/dist/js/pignose.calendar.js') }}"></script>
+    <script src="{{ asset('bundles/js/datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/FlexSlider/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('bundles/js/datepickerFilter.js') }}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <script src="{{asset('bundles/js/calendar.js') }}"></script> -->
-    <script src="{{asset('bundles/js/autocomplete.js') }}"></script>
-  </body>
+    <!-- <script src="{{ asset('bundles/js/calendar.js') }}"></script> -->
+    <script src="{{ asset('bundles/js/autocomplete.js') }}"></script>
+</head>
+<body>
+
+{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+    {{ include("SwapPlatformBundle:Swap:menuNavigationConnecte.html.twig") }}
+{% else %}
+    {{ include("SwapPlatformBundle:Swap:menuNavigation.html.twig") }}
+{% endif %}
+{% block body %}
+{% endblock %}
+
+</body>
 </html>

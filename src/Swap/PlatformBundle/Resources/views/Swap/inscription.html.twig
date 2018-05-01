@@ -4,24 +4,24 @@
 
 {% block body %}
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-offset-1 col-md-5">
-			<h3>Informations personnelles</h3>
-			<div class="well">
-				{{ form_start(form) }}
-				{# Les erreurs générales du formulaire. #}
-				{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.username, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.email, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.password, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.verificationMotDePasse, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-default' }} ) }}
-				{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">
+                <h3>Informations personnelles</h3>
+                <div class="well">
+                    {{ form_start(form) }}
+                    {# Les erreurs générales du formulaire. #}
+                    {{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_row(form.username, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_row(form.email, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_row(form.password, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_row(form.verificationMotDePasse, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-default' }} ) }}
+                    {{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

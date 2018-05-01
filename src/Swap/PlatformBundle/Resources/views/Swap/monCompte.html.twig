@@ -4,266 +4,324 @@
 
 {% block body %}
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-3 col-md-offset-1">
-			<div class="panel-body shadow Compte">
-				<img class="img-responsive" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
-				<p>{{ user.username }}</p>
-				<p>Ma swapBank : {{ user.swapBank }}
-				<a href="{{ path('swap_platform_profil') }}">
-					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Modifier mon profil</button>
-				</a>
-			</div>
-		</div>
-		<div class="col-md-7">
-			<div class="panel-body shadow Compte">
-				<a href="{{path('swap_manage_swap') }}">
-					<button type="button" class="btn btn-info btn-lg col-xs-3">Mes swaps <span class="glyphicon glyphicon-edit"></span></button>
-				</a>
-				<a href="{{ path('swap_ajouter_service') }}">
-					<button type="button" class="btn btn-success btn-lg col-xs-offset-1 col-xs-4">Ajouter un Swap <span class="glyphicon glyphicon-plus"></span></button>
-				</a>
-				<button type="button" class="btn btn-primary btn-lg col-xs-offset-1 col-xs-3">Messages <span class="glyphicon glyphicon-envelope"></span></button>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-warning shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><h3 class="panel-title">{{ 'core.dashboard.block_notification.title'|trans }}<span class="badge">{{ servicesToRender|length }}</span></h3><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-					{% for reservation in reservations %}
-						{% if reservation.dateDeparture < date %}
-							{% if reservation.status != 3 %}
-							<div class="notification">
-								<div class="row">
-									<div class="col-xs-12 col-sm-5">
-										<p>Apèrs l'échange que vous avez effectué avec {{ reservation.service.user.username}}</p>
-									</div>
-									<div class="col-xs-12 col-sm-3">
-									<a href="{{ path('swap_send_comment', { 'id': reservation.id }) }}">
-										<button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">Laisser un commentaire</button>
-									</div></a>
-									<a href="{{ path('swap_notification_delete', { 'id': reservation.id }) }}">
-										<div class="col-offset-xs-12 col-xs-3 col-sm-offset-1 col-sm-2">
-											<button class="btn btn-danger raleway400 text-center col-xs-94 col-xs-offset-1">Supprimer</button>
-										</div></a>
-									</div>
-								</div>
-							{% endif %}
-						{% endif %}
-					{% endfor %}
-					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-info shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><p>{{ 'core.dashboard.block_request_received.title'|trans }}</p><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-						<table>
-						<thead>
-							<tr>
-								<td>Statut</td>
-								<td>Date/Service</td>
-								<td>Membre</td>
-								<td>Total SwapPoints</td>
-								<td>Action</td>
-							</tr>
-						</thead>
-						{% for reservation in reservations %}
-							{% if reservation.userService.id == user.id %}
-								{% if reservation.reservationStatus == 'pending request' %}
-									<tbody>
-										<tr>
-											<td> En Attente</td>
-											<td>
-												{{ reservation.service.categorie }}</br>
-												Du : </br>
-												Au :
-											</td>
-											<td>
-												{{ reservation.service.user.username }}
-											</td>
-											<td>{{ reservation.totalSwapPoints }}</td>
-											<td>
-												<div>
-													<a href="{{ path('swap_send_comment', { 'id': reservation.id }) }}">
-														<button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">Accepter</button>
-														</div>
-													</a>
-												</div>
-												<div>
-													<a href="{{ path('swap_notification_delete', { 'id': reservation.id }) }}">
-														<button class="btn btn-danger raleway400 text-center col-xs-94 col-xs-offset-1">Refuser</button>
-													</a>
-												</div>
-											</td>
-										</tr>
-									</tbody>	
-								{% endif %}
-							{% endif %}
-						{% endfor %}
-						</table>
-					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-info shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><p>{{ 'core.dashboard.block_request_sent.title'|trans }} <span class="badge">{{ reservations|length }}</span></p><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-						<table>
-						<thead>
-							<tr>
-								<td>Statut</td>
-								<td>Date/Service</td>
-								<td>Membre</td>
-								<td>Total SwapPoints</td>
-								<td>Action</td>
-							</tr>
-						</thead>
-						{% for reservation in reservations %}
-							{% if reservation.reservationStatus == 'pending request' %}
-								<tbody>
-									<tr>
-										<td> En Attente</td>
-										<td>
-											{{ reservation.service.categorie }}</br>
-											Du : </br>
-											Au :
-										</td>
-										<td>
-											{{ reservation.service.user.username }}
-										</td>
-										<td>{{ reservation.totalSwapPoints }}</td>
-										<td>Détails</td>
-									</tr>
-								</tbody>
-							{% endif %}
-						{% endfor %}
-						</table>
-					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-info shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><h3 class="panel-title">{{ 'core.dashboard.block_next_swap_toReceived.title'|trans }} <span class="badge">{{ reservations|length }}</span></h3><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-						<table>
-						<thead>
-							<tr>
-								<td>Statut</td>
-								<td>Date/Service</td>
-								<td>Membre</td>
-								<td>Détails</td>
-							</tr>
-						</thead>
-						{% for reservation in reservations %}
-							<tbody>
-								<tr>
-									<td></td>
-									<td>
-										{{ reservation.service.categorie }}</br>
-										Du : </br>
-										Au :
-									</td>
-									<td>
-										{{ reservation.service.user.username }}
-									</td>
-									<td>Détails</td>
-								</tr>
-							</tbody>
-						{% endfor %}
-						</table>
-					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-info shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><h3 class="panel-title">{{ 'core.dashboard.block_next_swap_toGive.title'|trans }} <span class="badge">{{ servicesToRender|length }}</span></h3><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-						<table>
-						<thead>
-							<tr>
-								<td>Statut</td>
-								<td>Date/Service</td>
-								<td>Membre</td>
-								<td>Détails</td>
-							</tr>
-						</thead>
-						{% for serviceToRender in servicesToRender %}
-							<tbody>
-								<tr>
-									<td></td>
-									<td>
-										{{ serviceToRender.service.categorie }}</br>
-										Du :  </br>
-										Au : 
-									</td>
-									<td>
-										{{ serviceToRender.userReservation.username }}
-									</td>
-									<td>Détails</td>
-								</tr>
-							</tbody>
-						{% endfor %}
-						</table>
-					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="panelClickable" class="panel panel-info shadow Compte">
-						<div class="panel-heading">
-							<span class="titreCompte"><p>{{ 'core.dashboard.{{ 'core.dashboard.block_next_swap_toGive.title'|trans }}.title'|trans }}</p><span>
-							<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-						</div>
-					<div id="panelClickableBody" class="panel-body">
-					</div>
-				</div>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
-			
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-	$('button').click(function(){
-	  $('.bg-info').toggle();
-	});
-</script>
-<script>
-$(document).on('click', '.panel-heading span.clickable', function(e){
-    var $this = $(this);
-	if(!$this.hasClass('panel-collapsed')) {
-		$this.parents('.panel').find('.panel-body').slideDown();
-		$this.addClass('panel-collapsed');
-		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-	} else {
-		$this.parents('.panel').find('.panel-body').slideUp();
-		$this.removeClass('panel-collapsed');
-		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-	}
-})
-</script>
-	{% include 'map.html.twig' %}
-{% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <div class="panel-body shadow Compte">
+                    <img class="img-responsive" src="{{ asset('bundles/swapplatform/images/silhouette.png') }}">
+                    <p>{{ user.username }}</p>
+                    <p>Ma swapBank : {{ user.swapBank }}
+                        <a href="{{ path('swap_platform_profil') }}">
+                            <button id="boutonProfil" class="btn btn-primary text-center col-md-12">
+                                Modifier mon profil
+                            </button>
+                        </a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="panel-body shadow Compte">
+                    <a href="{{ path('swap_manage_swap') }}">
+                        <button type="button" class="btn btn-info btn-lg col-xs-3">
+                            Mes swaps
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </a>
+                    <a href="{{ path('swap_ajouter_service') }}">
+                        <button type="button" class="btn btn-success btn-lg col-xs-offset-1 col-xs-4">
+                            Ajouter un Swap
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </a>
+                    <button type="button" class="btn btn-primary btn-lg col-xs-offset-1 col-xs-3">Messages
+                        <span class="glyphicon glyphicon-envelope"></span></button>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="panelClickable" class="panel panel-warning shadow Compte">
+                            <div class="panel-heading">
+							<span class="titreCompte">
+                                <h3 class="panel-title">
+                                    {{ 'core.dashboard.block_notification.title'|trans }}
+                                    <span class="badge">{{ servicesToRender|length }}</span>
+                                </h3>
+                            </span>
+                                <span class="pull-right clickable">
+                                    <i class="glyphicon glyphicon-chevron-down"></i>
+                                </span>
+                            </div>
+                            <div id="panelClickableBody" class="panel-body">
+                                {% for reservation in reservations %}
+                                    {% if reservation.dateDeparture < date %}
+                                        {% if reservation.status != 3 %}
+                                            <div class="notification">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-5">
+                                                        <p>Apèrs l'échange que vous avez effectué
+                                                            avec {{ reservation.service.user.username }}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <a href="{{ path('swap_send_comment', { 'id': reservation.id }) }}">
+                                                            <button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">
+                                                                Laisser un commentaire
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                    </a>
+                                                    <a href="{{ path('swap_notification_delete', { 'id': reservation.id }) }}">
+                                                        <div class="col-offset-xs-12 col-xs-3 col-sm-offset-1 col-sm-2">
+                                                            <button class="btn btn-danger raleway400 text-center col-xs-94 col-xs-offset-1">
+                                                                Supprimer
+                                                            </button>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="panelClickable" class="panel panel-info shadow Compte">
+                                    <div class="panel-heading">
+                                        <span class="titreCompte"><p>{{ 'core.dashboard.block_request_received.title'|trans }}</p></span>
+                                        <span class="pull-right clickable">
+                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                    <div id="panelClickableBody" class="panel-body">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <td>Statut</td>
+                                                <td>Date/Service</td>
+                                                <td>Membre</td>
+                                                <td>Total SwapPoints</td>
+                                                <td>Action</td>
+                                            </tr>
+                                            </thead>
+                                            {% for reservation in reservations %}
+                                            {% if reservation.userService.id == user.id %}
+                                            {% if reservation.reservationStatus == 'pending request' %}
+                                            <tbody>
+                                            <tr>
+                                                <td> En Attente</td>
+                                                <td>
+                                                    {{ reservation.service.categorie }}</br>
+                                                    Du : </br>
+                                                    Au :
+                                                </td>
+                                                <td>
+                                                    {{ reservation.service.user.username }}
+                                                </td>
+                                                <td>{{ reservation.totalSwapPoints }}</td>
+                                                <td>
+                                                    <div>
+                                                        <a href="{{ path('swap_send_comment', { 'id': reservation.id }) }}">
+                                                            <button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">
+                                                                Accepter
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <a href="{{ path('swap_notification_delete', { 'id': reservation.id }) }}">
+                                            <button class="btn btn-danger raleway400 text-center col-xs-94 col-xs-offset-1">
+                                                Refuser
+                                            </button>
+                                        </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    </tbody>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="panelClickable" class="panel panel-info shadow Compte">
+                                        <div class="panel-heading">
+                                        <span class="titreCompte">
+                                            <p>{{ 'core.dashboard.block_request_sent.title'|trans }}
+                                                <span class="badge">{{ reservations|length }}</span>
+                                            </p>
+                                        </span>
+                                            <span class="pull-right clickable">
+                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                        </span>
+                                        </div>
+                                        <div id="panelClickableBody" class="panel-body">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <td>Statut</td>
+                                                    <td>Date/Service</td>
+                                                    <td>Membre</td>
+                                                    <td>Total SwapPoints</td>
+                                                    <td>Action</td>
+                                                </tr>
+                                                </thead>
+                                                {% for reservation in reservations %}
+                                                    {% if reservation.reservationStatus == 'pending request' %}
+                                                        <tbody>
+                                                        <tr>
+                                                            <td> En Attente</td>
+                                                            <td>
+                                                                {{ reservation.service.categorie }}</br>
+                                                                Du : </br>
+                                                                Au :
+                                                            </td>
+                                                            <td>
+                                                                {{ reservation.service.user.username }}
+                                                            </td>
+                                                            <td>{{ reservation.totalSwapPoints }}</td>
+                                                            <td>Détails</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="panelClickable" class="panel panel-info shadow Compte">
+                                                <div class="panel-heading">
+                                                <span class="titreCompte">
+                                                    <h3 class="panel-title">{{ 'core.dashboard.block_next_swap_toReceived.title'|trans }}
+                                                        <span class="badge">{{ reservations|length }}</span>
+                                                    </h3>
+                                                </span>
+                                                    <span class="pull-right clickable">
+                                                    <i class="glyphicon glyphicon-chevron-down"></i>
+                                                </span>
+                                                </div>
+                                                <div id="panelClickableBody" class="panel-body">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <td>Statut</td>
+                                                            <td>Date/Service</td>
+                                                            <td>Membre</td>
+                                                            <td>Détails</td>
+                                                        </tr>
+                                                        </thead>
+                                                        {% for reservation in reservations %}
+                                                            <tbody>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>
+                                                                    {{ reservation.service.categorie }}</br>
+                                                                    Du : </br>
+                                                                    Au :
+                                                                </td>
+                                                                <td>
+                                                                    {{ reservation.service.user.username }}
+                                                                </td>
+                                                                <td>Détails</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="panelClickable" class="panel panel-info shadow Compte">
+                                                        <div class="panel-heading">
+                                                        <span class="titreCompte">
+                                                            <h3 class="panel-title">{{ 'core.dashboard.block_next_swap_toGive.title'|trans }}
+                                                                <span class="badge">{{ servicesToRender|length }}</span>
+                                                            </h3>
+                                                        </span>
+                                                            <span class="pull-right clickable">
+                                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                                        </span>
+                                                        </div>
+                                                        <div id="panelClickableBody" class="panel-body">
+                                                            <table>
+                                                                <thead>
+                                                                <tr>
+                                                                    <td>Statut</td>
+                                                                    <td>Date/Service</td>
+                                                                    <td>Membre</td>
+                                                                    <td>Détails</td>
+                                                                </tr>
+                                                                </thead>
+                                                                {% for serviceToRender in servicesToRender %}
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            {{ serviceToRender.service.categorie }}</br>
+                                                                            Du :  </br>
+                                                                            Au :
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ serviceToRender.userReservation.username }}
+                                                                        </td>
+                                                                        <td>Détails</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                {% endfor %}
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div id="panelClickable"
+                                                                 class="panel panel-info shadow Compte">
+                                                                <div class="panel-heading">
+                                                                    {# A corriger #}
+                                                                    {#<span class="titreCompte"><p>{{ 'core.dashboard.{{ 'core.dashboard.block_next_swap_toGive.title'|trans }}.title'|trans }}</p><span>#}
+                                                                    {#<span class="titreCompte"><p>{{ 'core.dashboard.{{ 'core.dashboard.block_next_swap_toGive.title'|trans }}.title'|trans }}</p><span>#}
+                                                                    <span class="pull-right clickable"><i
+                                                                                class="glyphicon glyphicon-chevron-down"></i></span>
+                                                                </div>
+                                                                <div id="panelClickableBody" class="panel-body">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
+                    <script>
+                        $('button').click(function () {
+                            $('.bg-info').toggle();
+                        });
+                        $(document).on('click', '.panel-heading span.clickable', function (e) {
+                            var $this = $(this);
+                            if (!$this.hasClass('panel-collapsed')) {
+                                $this.parents('.panel').find('.panel-body').slideDown();
+                                $this.addClass('panel-collapsed');
+                                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                            } else {
+                                $this.parents('.panel').find('.panel-body').slideUp();
+                                $this.removeClass('panel-collapsed');
+                                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                            }
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#{% include 'map.html.twig' %}#}
+{% endblock %}

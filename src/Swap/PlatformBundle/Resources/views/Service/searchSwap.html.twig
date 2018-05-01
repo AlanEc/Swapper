@@ -3,61 +3,60 @@
 {% block title %}{{ parent() }} - Index{% endblock %}
 
 {% block body %}
-	<div class="row">
-		<div class="col-md-6">
-			<div class="row">
-				<div class="col-md-1">
-					{{ form_start(form) }}
-			        {{ form_errors(form) }}
-			        {{ form_label(form.dateArrival) }}
-			    </div>
-			    <div class="col-md-2">
-			        {{ form_widget(form.dateArrival, { 'attr': { 'class' : 'form-control' }} ) }}
-		            {{ form_errors(form.dateArrival) }}
-			    </div>
-			    <div class="col-md-1">
-			        {{ form_label(form.dateDeparture) }}
-			    </div>
-			    <div class="col-md-2">
-			        {{ form_widget(form.dateDeparture, { 'attr': { 'class' : 'form-control' }} ) }}
-		            {{ form_errors(form.dateDeparture) }}
-			    </div>
-			    <div class="col-md-3">
-			        {{ form_widget(form.numberPersons, { 'attr': { 'class' : 'form-control' }} ) }}
-		            {{ form_errors(form.numberPersons) }}
-			    </div>
-			        {{ form_row(form.filtrer, { 'attr': { 'class' : 'btn btn-default' }} ) }}
-			        {{ form_rest(form) }}
-			        {{ form_end(form) }}
-			    </div>
-			</div>
-	    </div>
-	</div>
-		<div class="row">
-		<div class="col-md-offset-3 col-md-3 ">
-			{% set gps = [] %}
-			{% for swap in listSwaps %}
-				<div id="resultSearch" class="panel panel-default">
-					<div class="row">
-						<div class= col-md-3 ">
-							{{ swap.categorie }}
-						</div>
-						<div class="col-md-5 ">
-							{{ swap.adresse }}
-						</div>
-						<div class="col-md-3 ">
-							{{ swap.user }}
-							<a href="{{ path('swap_focus', { 'id': swap.id }) }}">Voir le Swap</a>
-						</div>
-					</div>
-				</div>
-				{% set gps = gps|merge(['{lat:' ~ swap.lattitude ~ ', lng: ' ~ swap.longitude ~ ' },']) 
-				%}
-			{% endfor %}
-		</div>
-		<div id="map" class="col-md-6"></div>
-	</div>
-	{% include 'map.html.twig' %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-1">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_label(form.dateArrival) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_widget(form.dateArrival, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_errors(form.dateArrival) }}
+                </div>
+                <div class="col-md-1">
+                    {{ form_label(form.dateDeparture) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_widget(form.dateDeparture, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_errors(form.dateDeparture) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_widget(form.numberPersons, { 'attr': { 'class' : 'form-control' }} ) }}
+                    {{ form_errors(form.numberPersons) }}
+                </div>
+                {{ form_row(form.filtrer, { 'attr': { 'class' : 'btn btn-default' }} ) }}
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-3 ">
+            {% set gps = [] %}
+            {% for swap in listSwaps %}
+                <div id="resultSearch" class="panel panel-default">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ swap.categorie }}
+                        </div>
+                        <div class="col-md-5">
+                            {{ swap.adresse }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ swap.user }}
+                            <a href="{{ path('swap_focus', { 'id': swap.id }) }}">Voir le Swap</a>
+                        </div>
+                    </div>
+                </div>
+                {% set gps = gps|merge(['{lat:' ~ swap.lattitude ~ ', lng: ' ~ swap.longitude ~ ' },']) %}
+            {% endfor %}
+        </div>
+        <div id="map" class="col-md-6"></div>
+    </div>
+    {% include 'map.html.twig' %}
 
 {% endblock %}
 

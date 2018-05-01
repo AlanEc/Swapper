@@ -8,7 +8,6 @@
 			<div class="col-md-3 col-md-offset-1">
 				<div class="panel-body shadow Compte">
 					<img class="img-responsive img-circle img-responsive" id="silouhetteConversation" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
-			
 				</div>
 			</div>
 			<div id="conversation-message" class="col-md-offset-1 col-md-6">
@@ -16,9 +15,12 @@
 					{{ form_start(form) }}
 					{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
 					{{ form_row(form.content, { 'attr': { 'class' : 'form-control' }} ) }}
-					{{ form_row(form.save, { 'attr': { 'class' : 'btn btn-group pull-right' }} ) }}        
+					{{ form_row(form.save, { 'attr': { 'class' : 'btn btn-group pull-right' }} ) }}
 					{{ form_rest(form, { 'attr': { 'class' : 'form-control' }} ) }}
 					{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
 				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
